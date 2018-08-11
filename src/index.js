@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import "./index.css";
 import "./avoiding-array-mutations";
+import "./avoiding-object-mutations";
 
 function counter(state = 0, action) {
   switch (action.type) {
