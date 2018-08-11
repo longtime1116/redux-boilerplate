@@ -12,18 +12,29 @@ function todos(state = [], action) {
           completed: false
         }
       ];
+    case "TOGGLE_TODO":
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        } else {
+          return todo;
+        }
+      });
     default:
       return state;
   }
 }
 
 function testAddTodo() {
-  const stateBefore = [];
   let action = {
     id: 0,
     type: "ADD_TODO",
     text: "redux tutorial"
   };
+  const stateBefore = [];
   let stateAfter = [
     {
       id: 0,
@@ -38,5 +49,39 @@ function testAddTodo() {
   expect(todos(stateBefore, action)).toEqual(stateAfter);
 }
 
+function testToggleTodo() {
+  let action = {
+    id: 0,
+    type: "TOGGLE_TODO"
+  };
+  const stateBefore = [
+    {
+      id: 0,
+      text: "react tutorial",
+      completed: false
+    },
+    {
+      id: 1,
+      text: "redux tutorial",
+      completed: false
+    }
+  ];
+  const stateAfter = [
+    {
+      id: 0,
+      text: "react tutorial",
+      completed: true
+    },
+    {
+      id: 1,
+      text: "redux tutorial",
+      completed: false
+    }
+  ];
+
+  expect(todos(stateBefore, action)).toEqual(stateAfter);
+}
+
 testAddTodo();
+testToggleTodo();
 console.log("[writing-a-todo-list-reducer.js]: all test passed!");
