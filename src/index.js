@@ -1,4 +1,6 @@
 import expect from "expect";
+import React from "react";
+import ReactDOM from "react-dom";
 import "./index.css";
 import { createStore } from "redux";
 
@@ -24,9 +26,16 @@ console.log(store.getState());
 store.dispatch({ type: "INCREMENT" });
 console.log(store.getState());
 
+function Counter({ value }) {
+  return <h1>{value}</h1>;
+}
+
 // subscribe
 const render = () => {
-  document.body.innerText = store.getState();
+  ReactDOM.render(
+    <Counter value={store.getState()} />,
+    document.getElementById("root")
+  );
 };
 const onClick = () => {
   store.dispatch({ type: "INCREMENT" });
