@@ -1,7 +1,7 @@
 import expect from "expect";
 import deepFreeze from "deep-freeze";
 
-function addTodo(state = [], action) {
+function todos(state = [], action) {
   switch (action.type) {
     case "ADD_TODO":
       return [
@@ -35,7 +35,7 @@ function testAddTodo() {
   deepFreeze(stateBefore);
   deepFreeze(action);
 
-  expect(addTodo(stateBefore, action)).toEqual(stateAfter);
+  expect(todos(stateBefore, action)).toEqual(stateAfter);
 }
 
 testAddTodo();
