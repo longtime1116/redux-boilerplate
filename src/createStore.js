@@ -1,3 +1,6 @@
+// When use this file...
+// import createStore from "./createStore";
+
 function createStore(reducer) {
   let state;
   let listeners = [];

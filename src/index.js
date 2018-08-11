@@ -1,7 +1,7 @@
 import expect from "expect";
 import React from "react";
 import ReactDOM from "react-dom";
-import createStore from "./createStore";
+import { createStore } from "redux";
 import "./index.css";
 
 function counter(state = 0, action) {
