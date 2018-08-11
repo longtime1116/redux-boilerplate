@@ -1,8 +1,8 @@
 import expect from "expect";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { createStore } from "redux";
+import "./index.css";
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -22,24 +22,28 @@ console.log("all test passed!");
 
 // create store
 const store = createStore(counter);
-console.log(store.getState());
-store.dispatch({ type: "INCREMENT" });
-console.log(store.getState());
 
-function Counter({ value }) {
-  return <h1>{value}</h1>;
+function Counter({ value, onIncrement, onDecrement }) {
+  return (
+    <div>
+      <h1>{value}</h1>
+      <button onClick={() => onIncrement()}>+</button>
+      <button onClick={() => onDecrement()}>-</button>
+    </div>
+  );
 }
 
 // subscribe
 const render = () => {
   ReactDOM.render(
-    <Counter value={store.getState()} />,
+    <Counter
+      value={store.getState()}
+      onIncrement={() => store.dispatch({ type: "INCREMENT" })}
+      onDecrement={() => store.dispatch({ type: "DECREMENT" })}
+    />,
     document.getElementById("root")
   );
 };
-const onClick = () => {
-  store.dispatch({ type: "INCREMENT" });
-};
+
 store.subscribe(render);
-document.addEventListener("click", onClick);
 render();
