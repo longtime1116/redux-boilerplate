@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import "./index.css";
+import "./avoiding-array-mutations";
 
 function counter(state = 0, action) {
   switch (action.type) {
@@ -18,7 +19,7 @@ expect(counter(1, { type: "INCREMENT" })).toEqual(2);
 expect(counter(2, { type: "DECREMENT" })).toEqual(1);
 expect(counter(1, { type: "UNKNOWN" })).toEqual(1);
 expect(counter(undefined, { type: "UNKNOWN" })).toEqual(0);
-console.log("all test passed!");
+console.log("[index.js]: all test passed!");
 
 // create store
 const store = createStore(counter);
