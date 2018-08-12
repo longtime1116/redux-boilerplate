@@ -41,15 +41,7 @@ export default function TodoApp({ todos, visibilityFilter }) {
           });
         }}
       />
-      <Footer
-        visibilityFilter={visibilityFilter}
-        onVisibilityFilterClick={filter => {
-          store.dispatch({
-            type: "SET_VISIBILITY_FILTER",
-            filter: filter
-          });
-        }}
-      />
+      <Footer />
     </div>
   );
 }
