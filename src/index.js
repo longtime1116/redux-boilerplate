@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import todoApp from "./reducers/todoApp";
 import TodoList from "./components/TodoList";
+import AddTodo from "./components/AddTodo";
 
 const store = createStore(
   todoApp,
@@ -47,23 +48,16 @@ export default class TodoApp extends Component {
     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
     return (
       <div>
-        <input
-          ref={node => {
-            this.input = node;
-          }}
-        />
-        <button
-          onClick={() => {
+        <AddTodo
+          onAddTodoClick={text => {
             store.dispatch({
               type: "ADD_TODO",
               id: nextTodoId++,
-              text: this.input.value
+              text: text
             });
-            this.input.value = "";
           }}
-        >
-          Add Todo
-        </button>
+        />
+
         <TodoList
           todos={visibleTodos}
           onTodoClick={id => {
