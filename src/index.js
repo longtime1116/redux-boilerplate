@@ -9,8 +9,29 @@ const store = createStore(
 );
 let nextTodoId = 0;
 
+const FilterLink = ({ children, filter, currentFilter }) => {
+  if (currentFilter === filter) {
+    return <span>{children}</span>;
+  }
+  return (
+    <a
+      href="#"
+      onClick={event => {
+        event.preventDefault();
+        store.dispatch({
+          type: "SET_VISIBILITY_FILTER",
+          filter: filter
+        });
+      }}
+    >
+      {children}
+    </a>
+  );
+};
+
 export default class TodoApp extends Component {
   render() {
+    const { todos, visibilityFilter } = this.props;
     return (
       <div>
         <input
@@ -31,7 +52,7 @@ export default class TodoApp extends Component {
           Add Todo
         </button>
         <ul>
-          {this.props.todos.map(todo => {
+          {todos.map(todo => {
             return (
               <li
                 key={todo.id}
@@ -50,6 +71,18 @@ export default class TodoApp extends Component {
             );
           })}
         </ul>
+        <p>
+          Show:{" "}
+          <FilterLink filter="SHOW_ALL" currentFilter={visibilityFilter}>
+            ALL
+          </FilterLink>{" "}
+          <FilterLink filter="SHOW_ACTIVE" currentFilter={visibilityFilter}>
+            ACTIVE
+          </FilterLink>{" "}
+          <FilterLink filter="SHOW_COMPLETED" currentFilter={visibilityFilter}>
+            COMPLETED
+          </FilterLink>
+        </p>
       </div>
     );
   }
@@ -57,7 +90,7 @@ export default class TodoApp extends Component {
 // subscribe
 const render = () => {
   ReactDOM.render(
-    <TodoApp todos={store.getState().todos} />,
+    <TodoApp {...store.getState()} />,
     document.getElementById("root")
   );
 };
