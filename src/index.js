@@ -9,6 +9,17 @@ const store = createStore(
 );
 let nextTodoId = 0;
 
+const getVisibleTodos = (todos, visibilityFilter) => {
+  switch (visibilityFilter) {
+    case "SHOW_ALL":
+      return todos;
+    case "SHOW_ACTIVE":
+      return todos.filter(t => !t.completed);
+    case "SHOW_COMPLETED":
+      return todos.filter(t => t.completed);
+  }
+};
+
 const FilterLink = ({ children, filter, currentFilter }) => {
   if (currentFilter === filter) {
     return <span>{children}</span>;
@@ -32,6 +43,7 @@ const FilterLink = ({ children, filter, currentFilter }) => {
 export default class TodoApp extends Component {
   render() {
     const { todos, visibilityFilter } = this.props;
+    const visibleTodos = getVisibleTodos(todos, visibilityFilter);
     return (
       <div>
         <input
@@ -52,7 +64,7 @@ export default class TodoApp extends Component {
           Add Todo
         </button>
         <ul>
-          {todos.map(todo => {
+          {visibleTodos.map(todo => {
             return (
               <li
                 key={todo.id}
