@@ -1,15 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
-import todoApp from "./reducers/todoApp";
 import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
+import store from "./store";
 
-const store = createStore(
-  todoApp,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
 let nextTodoId = 0;
 
 const getVisibleTodos = (todos, visibilityFilter) => {
