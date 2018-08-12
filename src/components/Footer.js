@@ -17,7 +17,7 @@ const FilterLink = ({ children, filter, currentFilter, onClick }) => {
   );
 };
 
-export default function Footer({ visibilityFilter, onVisiblityFilterClick }) {
+export default function Footer({ visibilityFilter, onVisibilityFilterClick }) {
   return (
     <p>
       Show:{" "}
@@ -25,7 +25,7 @@ export default function Footer({ visibilityFilter, onVisiblityFilterClick }) {
         filter="SHOW_ALL"
         currentFilter={visibilityFilter}
         onClick={filter => {
-          onVisiblityFilterClick(filter);
+          onVisibilityFilterClick(filter);
         }}
       >
         ALL
@@ -34,7 +34,7 @@ export default function Footer({ visibilityFilter, onVisiblityFilterClick }) {
         filter="SHOW_ACTIVE"
         currentFilter={visibilityFilter}
         onClick={filter => {
-          onVisiblityFilterClick(filter);
+          onVisibilityFilterClick(filter);
         }}
       >
         ACTIVE
@@ -43,7 +43,7 @@ export default function Footer({ visibilityFilter, onVisiblityFilterClick }) {
         filter="SHOW_COMPLETED"
         currentFilter={visibilityFilter}
         onClick={filter => {
-          onVisiblityFilterClick(filter);
+          onVisibilityFilterClick(filter);
         }}
       >
         COMPLETED

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import todoApp from "./reducers/todoApp";
@@ -23,43 +23,40 @@ const getVisibleTodos = (todos, visibilityFilter) => {
   }
 };
 
-export default class TodoApp extends Component {
-  render() {
-    const { todos, visibilityFilter } = this.props;
-    const visibleTodos = getVisibleTodos(todos, visibilityFilter);
-    return (
-      <div>
-        <AddTodo
-          onAddTodoClick={text => {
-            store.dispatch({
-              type: "ADD_TODO",
-              id: nextTodoId++,
-              text: text
-            });
-          }}
-        />
+export default function TodoApp({ todos, visibilityFilter }) {
+  const visibleTodos = getVisibleTodos(todos, visibilityFilter);
+  return (
+    <div>
+      <AddTodo
+        onAddTodoClick={text => {
+          store.dispatch({
+            type: "ADD_TODO",
+            id: nextTodoId++,
+            text: text
+          });
+        }}
+      />
 
-        <TodoList
-          todos={visibleTodos}
-          onTodoClick={id => {
-            store.dispatch({
-              id: id,
-              type: "TOGGLE_TODO"
-            });
-          }}
-        />
-        <Footer
-          visibilityFilter={visibilityFilter}
-          onVisiblityFilterClick={filter => {
-            store.dispatch({
-              type: "SET_VISIBILITY_FILTER",
-              filter: filter
-            });
-          }}
-        />
-      </div>
-    );
-  }
+      <TodoList
+        todos={visibleTodos}
+        onTodoClick={id => {
+          store.dispatch({
+            id: id,
+            type: "TOGGLE_TODO"
+          });
+        }}
+      />
+      <Footer
+        visibilityFilter={visibilityFilter}
+        onVisibilityFilterClick={filter => {
+          store.dispatch({
+            type: "SET_VISIBILITY_FILTER",
+            filter: filter
+          });
+        }}
+      />
+    </div>
+  );
 }
 // subscribe
 const render = () => {
