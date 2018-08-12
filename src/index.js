@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import todoApp from "./reducers/todoApp";
-import Todo from "./components/Todo";
+import TodoList from "./components/TodoList";
 
 const store = createStore(
   todoApp,
@@ -64,23 +64,15 @@ export default class TodoApp extends Component {
         >
           Add Todo
         </button>
-        <ul>
-          {visibleTodos.map(todo => {
-            return (
-              <Todo
-                key={todo.id}
-                text={todo.text}
-                completed={todo.completed}
-                onClick={() => {
-                  store.dispatch({
-                    id: todo.id,
-                    type: "TOGGLE_TODO"
-                  });
-                }}
-              />
-            );
-          })}
-        </ul>
+        <TodoList
+          todos={visibleTodos}
+          onTodoClick={id => {
+            store.dispatch({
+              id: id,
+              type: "TOGGLE_TODO"
+            });
+          }}
+        />
         <p>
           Show:{" "}
           <FilterLink filter="SHOW_ALL" currentFilter={visibilityFilter}>
