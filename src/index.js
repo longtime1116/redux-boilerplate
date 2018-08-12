@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import todoApp from "./reducers/todoApp";
+import Todo from "./components/Todo";
 
 const store = createStore(
   todoApp,
@@ -66,20 +67,17 @@ export default class TodoApp extends Component {
         <ul>
           {visibleTodos.map(todo => {
             return (
-              <li
+              <Todo
                 key={todo.id}
+                text={todo.text}
+                completed={todo.completed}
                 onClick={() => {
                   store.dispatch({
                     id: todo.id,
                     type: "TOGGLE_TODO"
                   });
                 }}
-                style={{
-                  textDecoration: todo.completed ? "line-through" : "none"
-                }}
-              >
-                {todo.text}
-              </li>
+              />
             );
           })}
         </ul>
