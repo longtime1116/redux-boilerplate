@@ -1,37 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AddTodo from "./components/AddTodo";
-import Footer from "./components/Footer";
 import VisibleTodoList from "./components/VisibleTodoList";
+import Footer from "./components/Footer";
 import store from "./store";
 
-let nextTodoId = 0;
-
-export default function TodoApp({ todos, visibilityFilter }) {
+export default function TodoApp() {
   return (
     <div>
-      <AddTodo
-        onAddTodoClick={text => {
-          store.dispatch({
-            type: "ADD_TODO",
-            id: nextTodoId++,
-            text: text
-          });
-        }}
-      />
-
+      <AddTodo />
       <VisibleTodoList />
-
       <Footer />
     </div>
   );
 }
 // subscribe
 const render = () => {
-  ReactDOM.render(
-    <TodoApp {...store.getState()} />,
-    document.getElementById("root")
-  );
+  ReactDOM.render(<TodoApp />, document.getElementById("root"));
 };
 
 store.subscribe(render);
