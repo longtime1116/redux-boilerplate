@@ -14,11 +14,5 @@ export default function TodoApp() {
     </div>
   );
 }
-// subscribe
-const render = () => {
-  ReactDOM.render(<TodoApp />, document.getElementById("root"));
-};
 
-store.subscribe(render);
-
-render();
+ReactDOM.render(<TodoApp />, document.getElementById("root"));
