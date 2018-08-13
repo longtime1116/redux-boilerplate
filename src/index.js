@@ -1,25 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TodoList from "./components/TodoList";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
+import VisibleTodoList from "./components/VisibleTodoList";
 import store from "./store";
 
 let nextTodoId = 0;
 
-const getVisibleTodos = (todos, visibilityFilter) => {
-  switch (visibilityFilter) {
-    case "SHOW_ALL":
-      return todos;
-    case "SHOW_ACTIVE":
-      return todos.filter(t => !t.completed);
-    case "SHOW_COMPLETED":
-      return todos.filter(t => t.completed);
-  }
-};
-
 export default function TodoApp({ todos, visibilityFilter }) {
-  const visibleTodos = getVisibleTodos(todos, visibilityFilter);
   return (
     <div>
       <AddTodo
@@ -32,15 +20,8 @@ export default function TodoApp({ todos, visibilityFilter }) {
         }}
       />
 
-      <TodoList
-        todos={visibleTodos}
-        onTodoClick={id => {
-          store.dispatch({
-            id: id,
-            type: "TOGGLE_TODO"
-          });
-        }}
-      />
+      <VisibleTodoList />
+
       <Footer />
     </div>
   );
