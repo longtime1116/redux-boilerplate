@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Provider from "./components/Provider";
+import { Provider } from "react-redux";
 import AddTodo from "./components/AddTodo";
 import VisibleTodoList from "./components/VisibleTodoList";
 import Footer from "./components/Footer";
