@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 let nextTodoId = 0;
 
-export default function AddTodo(props) {
+export default function AddTodo(_, context) {
   let input;
-  const { store } = props;
+  const { store } = context;
   return (
     <div>
       <input

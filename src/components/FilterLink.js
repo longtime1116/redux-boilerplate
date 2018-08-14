@@ -33,6 +33,6 @@ export default class FilterLink extends React.Component {
   }
 }
 
-FilterLink.contextType = {
+FilterLink.contextTypes = {
   store: PropTypes.object
 };
