@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TodoList from "./TodoList";
+import { connect } from "react-redux";
 
 const getVisibleTodos = (todos, visibilityFilter) => {
   switch (visibilityFilter) {
@@ -15,34 +15,22 @@ const getVisibleTodos = (todos, visibilityFilter) => {
   }
 };
 
-export default class VisibleTodoList extends React.Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => {
-      this.forceUpdate();
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const { store } = this.context;
-    const { todos, visibilityFilter } = store.getState();
-    return (
-      <TodoList
-        todos={getVisibleTodos(todos, visibilityFilter)}
-        onTodoClick={id => {
-          store.dispatch({
-            id: id,
-            type: "TOGGLE_TODO"
-          });
-        }}
-      />
-    );
-  }
+function mapStateToProps({ todos, visibilityFilter }) {
+  return { todos: getVisibleTodos(todos, visibilityFilter) };
 }
-VisibleTodoList.contextTypes = {
-  store: PropTypes.object
-};
+
+function mapStateToDispatch(dispatch) {
+  return {
+    onTodoClick: id => {
+      dispatch({
+        id: id,
+        type: "TOGGLE_TODO"
+      });
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapStateToDispatch
+)(TodoList);

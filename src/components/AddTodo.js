@@ -1,11 +1,10 @@
+import { connect } from "react-redux";
 import React from "react";
-import PropTypes from "prop-types";
 
 let nextTodoId = 0;
 
-export default function AddTodo(_, context) {
+function AddTodo({ dispatch }) {
   let input;
-  const { store } = context;
   return (
     <div>
       <input
@@ -15,7 +14,7 @@ export default function AddTodo(_, context) {
       />
       <button
         onClick={() => {
-          store.dispatch({
+          dispatch({
             type: "ADD_TODO",
             id: nextTodoId++,
             text: input.value
@@ -29,6 +28,14 @@ export default function AddTodo(_, context) {
   );
 }
 
-AddTodo.contextTypes = {
-  store: PropTypes.object
-};
+export default connect()(AddTodo);
+// mapDispatchToProps を指定していないと dispatch をそのまま return する、
+// つまり disptatch がそのまま props として渡るので、AddTodo はそれを受け取ることができる
+//AddTodo = connect(
+//  state => {
+//    return {};
+//  },
+//  dispatch => {
+//    return { dispatch };
+//  }
+//)(AddTodo);
