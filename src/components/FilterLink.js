@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import Link from "./Link";
+import setVisibilityFilter from "../actions/setVisibilityFilter";
 
 // ownProps として受け取るのではなく {filter} で必要なもののみ受け取っても良い
 // children は無くても動く
@@ -13,10 +14,7 @@ function mapStateToProps({ visibilityFilter }, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     onClick: () => {
-      dispatch({
-        type: "SET_VISIBILITY_FILTER",
-        filter: ownProps.filter
-      });
+      dispatch(setVisibilityFilter(ownProps.filter));
     }
   };
 }
