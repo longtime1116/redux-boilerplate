@@ -2,7 +2,7 @@ import React from "react";
 
 let nextTodoId = 0;
 
-export default function AddTodo({ onAddTodoClick }) {
+export default function AddTodo({ store }) {
   let input;
   return (
     <div>
