@@ -1,19 +1,12 @@
 import React from "react";
 import FilterLink from "./FilterLink";
 
-export default function Footer({ store }) {
+export default function Footer() {
   return (
     <p>
-      Show:{" "}
-      <FilterLink filter="SHOW_ALL" store={store}>
-        ALL
-      </FilterLink>{" "}
-      <FilterLink filter="SHOW_ACTIVE" store={store}>
-        ACTIVE
-      </FilterLink>{" "}
-      <FilterLink filter="SHOW_COMPLETED" store={store}>
-        COMPLETED
-      </FilterLink>
+      Show: <FilterLink filter="SHOW_ALL">ALL</FilterLink>{" "}
+      <FilterLink filter="SHOW_ACTIVE">ACTIVE</FilterLink>{" "}
+      <FilterLink filter="SHOW_COMPLETED">COMPLETED</FilterLink>
     </p>
   );
 }
